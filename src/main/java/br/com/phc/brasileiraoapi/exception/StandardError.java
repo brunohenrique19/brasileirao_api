@@ -1,5 +1,6 @@
 package br.com.phc.brasileiraoapi.exception;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardError {
-
-	private static final long serialVersionUID = 1L;
+public class StandardError implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private Long timestamp;
 	private Integer status;
 	private String error;
@@ -24,14 +25,12 @@ public class StandardError {
 	private String path;
 	
 	public StandardError(HttpStatus httpStatus, String message, String path) {
-		
 		super();
 		this.status = httpStatus.value();
 		this.error = httpStatus.name();
 		this.timestamp = new Date().getTime();
 		this.message = message;
 		this.path = path;
-		
 	}
-	
+
 }
